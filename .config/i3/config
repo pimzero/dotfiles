@@ -28,10 +28,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec BASEWD=$(xcwd) i3-sensible-terminal
-#bindsym $mod+Return exec BASEWD=$(xcwd) st
 bindsym $mod+Return exec st
-#bindsym $mod+Shift+Return exec ssh -Y pim@192.168.122.30 st
 
 # kill focused window
 bindsym $mod+Shift+a kill
@@ -39,7 +36,6 @@ bindsym $mod+Shift+a kill
 bindsym Mod1+F4 kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -97,16 +93,6 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-#bindsym $mod+ampersand workspace 1
-#bindsym $mod+eacute workspace 2
-#bindsym $mod+quotedbl workspace 3
-#bindsym $mod+apostrophe workspace 4
-#bindsym $mod+parenleft workspace 5
-#bindsym $mod+minus workspace 6
-#bindsym $mod+egrave workspace 7
-#bindsym $mod+underscore workspace 8
-#bindsym $mod+ccedilla workspace 9
-#bindsym $mod+agrave workspace 10
 bindcode $mod+10 workspace 0
 bindcode $mod+11 workspace 1
 bindcode $mod+12 workspace 2
@@ -194,12 +180,7 @@ focus_follows_mouse no
 
 for_window [class="^.*"] border pixel 1
 
-#for_window [class="^Firefox$" instance="^Places$"] floating enable move absolute position 100px 100px
-
 for_window [class="^Firefox$" instance="^Places$"] floating enable
-#for_window [class="^Firefox$" instance="^Places$"] move absolute position 0 px 0 px
-#for_window [class="^Firefox$" instance="^Places$"] resize shrink left 300
-#
 
 for_window [class="BaldursGate"] fullscreen enable, border none
 
@@ -222,16 +203,6 @@ workspace 6 output VGA1
 workspace 7 output VGA1
 workspace 8 output VGA1
 workspace 9 output VGA1
-#workspace 0 output DP-1
-#workspace 1 output DP-1
-#workspace 2 output DP-1
-#workspace 3 output DP-1
-#workspace 4 output DP-1
-#workspace 5 output VGA-1
-#workspace 6 output VGA-1
-#workspace 7 output VGA-1
-#workspace 8 output VGA-1
-#workspace 9 output VGA-1
 
 # Media control keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
