@@ -6,6 +6,7 @@
 
 # Trace exports
 # export() { builtin export "$@"; echo "${@%%=*} ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"; }
+#complete() { builtin complete "$@"; echo "complete ${@%%=*} ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"; }
 
 # If not running interactively, don't do anything
 case $- in
@@ -17,6 +18,8 @@ esac
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+#shopt -s failglob
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -84,3 +87,4 @@ export PERL5LIB="/home/pim/perl5/lib/perl5"
 export PERL_LOCAL_LIB_ROOT="/home/pim/perl5"
 PERL_MB_OPT="--install_base \"/home/pim/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/pim/perl5"; export PERL_MM_OPT;
+

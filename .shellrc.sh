@@ -1,3 +1,5 @@
+#!/bin/sh
+
 is_in_path() {
 	remove_slash() { echo ${1%/}; };
 	local IFS=:;
@@ -21,11 +23,15 @@ is_in_path() {
 is_in_path ~/go/bin
 [ $? -eq 0 ] && export PATH=~/go/bin:$PATH
 
+# ### .local/bin
+is_in_path ~/.local/bin
+[ $? -eq 0 ] && export PATH=~/.local/bin:$PATH
+
 
 # ### History:
 
 # https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.shell_history/$(date -u +%Y-%m-%d_%H:%M:%S)_$(hostname -s)_$$"
+HISTFILE="${HOME}/.shell_history/$(date -u +%Y-%m-%d_%H:%M:%S)_$(hostname -s)_$$.hist"
 
 HISTSIZE=80000
 HISTFILESIZE=160000
@@ -35,12 +41,12 @@ HISTFILESIZE=160000
 # /bin/bash will also load "~/.shell/*.bash"
 
 for f in ~/.shell/*.sh; do
-	source $f;
+	. $f;
 done
-if [[ `basename $SHELL` == "bash" ]]
+if [ `basename $SHELL` = "bash" ]
 then
 	for f in ~/.shell/*.bash; do
-		source $f;
+		. $f;
 	done
 fi
 
@@ -50,6 +56,12 @@ export PAGER="less"
 export VISUAL="vim"
 export EDITOR="vim"
 export PYTHONSTARTUP=~/.pythonrc
+export BROWSER="google-chrome-unstable"
+
+if [ -n "$DISPLAY" ]; then
+	export SUDO_ASKPASS="/usr/lib/ssh/ssh-askpass"
+	alias sudo='sudo -A'
+fi
 
 eval $(gpg-agent --daemon --enable-ssh-support 2>/dev/null)
 if [ -z "$SSH_AUTH_SOCK" ] ; then
@@ -59,12 +71,12 @@ fi
 #eval "$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
 
 # TMP
-function noaslr { setarch "$(uname -m)" -R "$@"; }
-function set_randomize_va_space { sysctl -w kernel.randomize_va_space=$@; }
+noaslr() { setarch "$(uname -m)" -R "$@"; }
+set_randomize_va_space() { sysctl -w kernel.randomize_va_space=$@; }
 
-_mboxComplete() {
-	local cur=${COMP_WORDS[COMP_CWORD]};
-	COMPREPLY=( $(compgen -W "$(ls /home/pim/.mailconfs/)" -- $cur) );
-}
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
-complete -F _mboxComplete mbox
+alias grpe=grep
+alias gpre=grep

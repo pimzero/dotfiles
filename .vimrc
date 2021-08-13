@@ -77,13 +77,14 @@
 	set runtimepath+=~/.vim/bundle/Vundle.vim
 	call vundle#begin()
 	Plugin 'gmarik/Vundle.vim'
-	Plugin 'Valloric/YouCompleteMe'
+	"Plugin 'Valloric/YouCompleteMe'
 	"Plugin 'OmniSharp/omnisharp-vim'
 	"Plugin 'JuliaLang/julia-vim'
 	"Plugin 'file:///home/pim/Workspace/smt-vim-syntax'
 
 	Plugin 'tomasr/molokai'
 	let g:molokai_original = 1
+	"Plugin 'altercation/vim-colors-solarized'
 
 	Plugin 'bling/vim-airline'
 "Minimap :
@@ -93,7 +94,7 @@
 
 	Plugin 'skywind3000/asyncrun.vim'
 
-	Plugin 'rdnetto/YCM-Generator'
+	"Plugin 'rdnetto/YCM-Generator'
 
 	Plugin 'jpalardy/vim-slime'
 
@@ -191,6 +192,7 @@ if ($TERM =~ '256color')
 	"colorscheme solarized
 	"let g:solarized_hitrail=1
 	"let g:solarized_termcolors=256
+	"hi Normal ctermbg=NONE guibg=NONE
 else
 	" Custom colors for when you use a bad terminal
 	" Line number

@@ -21,7 +21,7 @@ alias sl='ls'
 
 alias screenshot="scrot '$HOME/Screenshots/%F_%T.png'"
 
-function mbox()
+mbox()
 {
 	local NAME=$1
 	shift
@@ -54,4 +54,10 @@ alias startx='exec env -i \
 	XDG_VTNR="$XDG_VTNR" \
 	startx'
 
+# https://news.ycombinator.com/item?id=11071754
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+hist()
+{
+	CSEARCHINDEX="$HOME/.shell_history/.csearchindex" csearch -h $@ | uniq | grep -a $@
+}
