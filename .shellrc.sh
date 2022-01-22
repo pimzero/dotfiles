@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Bash exports SHELL=/bin/bash; however, it is not standard
+unset -v SHELL
+SHELL=$(readlink /proc/$$/exe 2>/dev/null || '')
+
 is_in_path() {
 	remove_slash() { echo ${1%/}; };
 	local IFS=:;
@@ -31,7 +35,8 @@ is_in_path ~/.local/bin
 # ### History:
 
 # https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.shell_history/$(date -u +%Y-%m-%d_%H:%M:%S)_$(hostname -s)_$$.hist"
+#HISTFILE="${HOME}/.shell_history/$(date -u +%Y-%m-%d_%H:%M:%S)_$(hostname -s)_$$.hist"
+HISTFILE="${HOME}/.shell_history/$(date -u +%Y-%m-%d_%H:%M:%S)_$(hostname)_$$.hist"
 
 HISTSIZE=80000
 HISTFILESIZE=160000
@@ -43,8 +48,7 @@ HISTFILESIZE=160000
 for f in ~/.shell/*.sh; do
 	. $f;
 done
-if [ `basename $SHELL` = "bash" ]
-then
+if [ `basename $SHELL` = "bash" ]; then
 	for f in ~/.shell/*.bash; do
 		. $f;
 	done
@@ -56,7 +60,8 @@ export PAGER="less"
 export VISUAL="vim"
 export EDITOR="vim"
 export PYTHONSTARTUP=~/.pythonrc
-export BROWSER="google-chrome-unstable"
+#export BROWSER="google-chrome-unstable"
+export BROWSER="chromium"
 
 if [ -n "$DISPLAY" ]; then
 	export SUDO_ASKPASS="/usr/lib/ssh/ssh-askpass"

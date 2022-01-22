@@ -242,5 +242,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 
+# Requiered for askpass to work correctly
+popup_during_fullscreen leave_fullscreen
 
 exec feh --bg-scale ~/Images/8f2549fe55464e20c5a141f59654107c.jpg --bg-scale ~/Images/8exjvnszti961.png

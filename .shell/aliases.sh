@@ -1,17 +1,13 @@
 #!/bin/sh
 
 # colors
-if [ -x /usr/bin/dircolors ]; then
-    # TODO: Removed at the moment as its 1341 bytes in env
-    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # ls
 alias ll='ls -alF'
@@ -21,8 +17,7 @@ alias sl='ls'
 
 alias screenshot="scrot '$HOME/Screenshots/%F_%T.png'"
 
-mbox()
-{
+mbox() {
 	local NAME=$1
 	shift
 	mutt -F"/home/pim/.mailconfs/$NAME" $@
@@ -37,6 +32,7 @@ alias ocaml='rlwrap ocaml'
 alias checkpatch='~/Data/linux/scripts/checkpatch.pl'
 alias gitlog="git --no-pager log --oneline --decorate"
 
+# Clean env
 alias startx='exec env -i \
 	DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
 	HOME="$HOME" \
@@ -55,9 +51,15 @@ alias startx='exec env -i \
 	startx'
 
 # https://news.ycombinator.com/item?id=11071754
-alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+dotfiles() {
+	if [ "$1" = "tig" ]; then
+		shift
+		GIT_DIR=$HOME/.dotfiles/ tig $@
+	else
+		git --git-dir=$HOME/.dotfiles --work-tree=$HOME $@
+	fi
+}
 
-hist()
-{
+hist() {
 	CSEARCHINDEX="$HOME/.shell_history/.csearchindex" csearch -h $@ | uniq | grep -a $@
 }

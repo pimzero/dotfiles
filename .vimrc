@@ -3,14 +3,6 @@
 " ================
 "
 """
-" Todo:
-" -----
-"
-" - Ctags
-" - JavaScript (+ evaluate selection or something like this ?)
-" - Publish gist
-"
-"""
 " Changelog:
 " ---------
 "(insert date : ":r !date")
@@ -36,8 +28,13 @@
 "
 " Fri Apr 17 22:40:45 CEST 2015
 "   - Now able to become a markdown file with
-"     `cat .vimrc | sed "s/^\"[^ ].*$//g" | sed "s/^\([^\"]\)/\t\1/g" |
-"     sed "s/^\"*[\" ]*//g" | sed "s/\(^TODO:.*$\)/*\1*/g"`
+"     ```
+"     $ sed -e "s/^\"[^ ].*$//g" \
+"           -e "s/^\([^\"]\)/\t\1/g" \
+"           -e "s/^\"*[\" ]*//g" \
+"           -e "s/\(^TODO:.*$\)/*\1*/g" <.vimrc | \
+"           pandoc -f gfm - -o doc.pdf --pdf-engine=xelatex
+"     ```
 "
 " Tue Apr 14 18:10:35 CEST 2015
 "   - Moved C parts to ./.vim/ftplugin/c.vim
@@ -77,7 +74,7 @@
 	set runtimepath+=~/.vim/bundle/Vundle.vim
 	call vundle#begin()
 	Plugin 'gmarik/Vundle.vim'
-	"Plugin 'Valloric/YouCompleteMe'
+	Plugin 'Valloric/YouCompleteMe'
 	"Plugin 'OmniSharp/omnisharp-vim'
 	"Plugin 'JuliaLang/julia-vim'
 	"Plugin 'file:///home/pim/Workspace/smt-vim-syntax'
@@ -97,6 +94,8 @@
 	"Plugin 'rdnetto/YCM-Generator'
 
 	Plugin 'jpalardy/vim-slime'
+
+	Plugin 'tpope/vim-fugitive'
 
 	call vundle#end()
 	filetype plugin indent on
@@ -600,3 +599,51 @@ set foldlevelstart=99
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 "autocmd FileType ocaml terminal ++close rlwrap ocaml -no-version
+"
+" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let s:opam_share_dir = system("opam config var share")
+let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+let s:opam_configuration = {}
+
+function! OpamConfOcpIndent()
+  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+endfunction
+let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+function! OpamConfOcpIndex()
+  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+endfunction
+let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+function! OpamConfMerlin()
+  let l:dir = s:opam_share_dir . "/merlin/vim"
+  execute "set rtp+=" . l:dir
+endfunction
+let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+" NOTE(pim): This command is really slow (~3s). let's hardocde it
+"let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+"let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+let s:opam_available_tools = ["merlin"]
+for tool in s:opam_packages
+  " Respect package order (merlin should be after ocp-index)
+  if count(s:opam_available_tools, tool) > 0
+    call s:opam_configuration[tool]()
+  endif
+endfor
+" ## end of OPAM user-setup addition for vim / base ## keep this line
+
+set completeopt+=menuone,noselect,noinsert
+set omnifunc=merlin#Complete
+
+let g:ycm_language_server =
+  \ [
+	  \   {
+	  \     'name': 'ocaml',
+  \     'cmdline': ['ocaml-language-server', '--stdio'],
+  \     'filetypes': ['ocaml']
+  \   },
+  \ ]
+
