@@ -9,19 +9,23 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# grep typos (fingers too fast)
+alias grpe=grep
+alias gpre=grep
+
 # ls
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias sl='ls'
 
-alias screenshot="scrot '$HOME/Screenshots/%F_%T.png'"
 
-mbox() {
-	local NAME=$1
-	shift
-	mutt -F"/home/pim/.mailconfs/$NAME" $@
-}
+# cd parent shortcuts
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias screenshot="scrot '$HOME/Screenshots/%F_%T.png'"
 
 alias suspend='systemctl suspend'
 alias pm-suspend='suspend'
@@ -32,7 +36,7 @@ alias ocaml='rlwrap ocaml'
 alias checkpatch='~/Data/linux/scripts/checkpatch.pl'
 alias gitlog="git --no-pager log --oneline --decorate"
 
-# Clean env
+# startx: Clean env
 alias startx='exec env -i \
 	DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
 	HOME="$HOME" \
@@ -50,6 +54,12 @@ alias startx='exec env -i \
 	XDG_VTNR="$XDG_VTNR" \
 	startx'
 
+mbox() {
+	local NAME=$1
+	shift
+	mutt -F"$HOME/.mailconfs/$NAME" $@
+}
+
 # https://news.ycombinator.com/item?id=11071754
 dotfiles() {
 	if [ "$1" = "tig" ]; then
@@ -63,3 +73,6 @@ dotfiles() {
 hist() {
 	CSEARCHINDEX="$HOME/.shell_history/.csearchindex" csearch -h $@ | uniq | grep -a $@
 }
+
+noaslr() { setarch "$(uname -m)" -R "$@"; }
+set_randomize_va_space() { sysctl -w kernel.randomize_va_space=$@; }
