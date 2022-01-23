@@ -55,23 +55,34 @@ else
 fi
 
 # PS1='\u@\H:\w\\$ ' # Bash format is not supported by dash
-PS1="$($tput_cmd bold)"
-PS1=$PS1"$($tput_cmd setaf 1)"'$USER'
-PS1=$PS1"$($tput_cmd setaf 7)@"
-PS1=$PS1"$($tput_cmd setaf 4)$(hostname)"
-PS1=$PS1"$($tput_cmd setaf 7):"
-PS1=$PS1"$($tput_cmd setaf 6)"
-PS1=$PS1'$(
-		if [ "${PWD#$HOME}" = "$PWD" ]; then
-			t="$PWD";
-		else
-			t="~${PWD#$HOME}";
-		fi;
-		[ "$t" != "/" ] && t="${t%/}";
-		printf "$t"
-	)'
-PS1=$PS1"$($tput_cmd setaf 7)$([ "$USER" = 'root' ] && printf '#' || printf '$')"
-PS1=$PS1"$($tput_cmd sgr0)$($tput_cmd el) "
+if [ `basename $SHELL` = "bash" ]; then
+	PS1="\[$($tput_cmd bold)\]"
+	PS1=$PS1"\[$($tput_cmd setaf 1)\]\u"
+	PS1=$PS1"\[$($tput_cmd setaf 7)\]@"
+	PS1=$PS1"\[$($tput_cmd setaf 4)\]\H"
+	PS1=$PS1"\[$($tput_cmd setaf 7)\]:"
+	PS1=$PS1"\[$($tput_cmd setaf 6)\]\w"
+	PS1=$PS1"\[$($tput_cmd setaf 7)\]\\$"
+	PS1=$PS1"\[$($tput_cmd sgr0)\] "
+else
+	PS1="$($tput_cmd bold)"
+	PS1=$PS1"$($tput_cmd setaf 1)"'$USER'
+	PS1=$PS1"$($tput_cmd setaf 7)@"
+	PS1=$PS1"$($tput_cmd setaf 4)$(hostname)"
+	PS1=$PS1"$($tput_cmd setaf 7):"
+	PS1=$PS1"$($tput_cmd setaf 6)"
+	PS1=$PS1'$(
+			if [ "${PWD#$HOME}" = "$PWD" ]; then
+				t="$PWD";
+			else
+				t="~${PWD#$HOME}";
+			fi;
+			[ "$t" != "/" ] && t="${t%/}";
+			printf "$t"
+		)'
+	PS1=$PS1"$($tput_cmd setaf 7)$([ "$USER" = 'root' ] && printf '#' || printf '$')"
+	PS1=$PS1"$($tput_cmd sgr0) "
+fi
 
 unset color_prompt tput_cmd
 
