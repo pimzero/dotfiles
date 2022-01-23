@@ -62,6 +62,7 @@ mbox() {
 
 # https://news.ycombinator.com/item?id=11071754
 dotfiles() {
+	local IFS=''
 	if [ "$1" = "tig" ]; then
 		shift
 		GIT_DIR=$HOME/.dotfiles/ tig $@
