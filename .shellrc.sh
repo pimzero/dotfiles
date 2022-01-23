@@ -71,7 +71,7 @@ PS1=$PS1'$(
 		printf "$t"
 	)'
 PS1=$PS1"$($tput_cmd setaf 7)$([ "$USER" = 'root' ] && printf '#' || printf '$')"
-PS1=$PS1"$($tput_cmd sgr0) "
+PS1=$PS1"$($tput_cmd sgr0)$($tput_cmd el) "
 
 unset color_prompt tput_cmd
 
@@ -102,5 +102,5 @@ fi
 
 eval $(gpg-agent --daemon --enable-ssh-support 2>/dev/null)
 if [ -z "$SSH_AUTH_SOCK" ] ; then
-	SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK;
+	SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"; export SSH_AUTH_SOCK;
 fi
