@@ -101,13 +101,12 @@ fi
 
 # ### Environement varialbes:
 
-export PAGER="less"
-export VISUAL="vim"
-export EDITOR="vim"
-export BROWSER="chromium"
+[ -z "$PAGER" ] && export PAGER="less"
+[ -z "$VISUAL" ] && export VISUAL="vim"
+[ -z "$EDITOR" ] && export EDITOR="vim"
 
 if [ -n "$DISPLAY" ]; then
-	export SUDO_ASKPASS="/usr/lib/ssh/ssh-askpass"
+	[ -z "$SUDO_ASKPASS" ] && export SUDO_ASKPASS="/usr/lib/ssh/ssh-askpass"
 	alias sudo='sudo -A'
 fi
 
