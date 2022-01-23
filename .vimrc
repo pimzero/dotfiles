@@ -23,8 +23,6 @@ call vundle#begin()
 
 	Plugin 'skywind3000/asyncrun.vim'
 
-	Plugin 'jpalardy/vim-slime'
-
 	Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
@@ -50,10 +48,6 @@ set completeopt=menu,menuone
 let g:airline_theme='molokai'
 let g:airline_powerline_fonts = 1
 set laststatus=2
-
-" ### vim-slime
-" (Ocaml repl)
-let g:slime_target = "vimterminal"
 
 " ## Basics
 
@@ -252,55 +246,3 @@ augroup END
 hi Conceal ctermbg=NONE ctermfg=white
 
 set foldlevelstart=99
-
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-"autocmd FileType ocaml terminal ++close rlwrap ocaml -no-version
-"
-" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
-let s:opam_share_dir = system("opam config var share")
-let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-
-let s:opam_configuration = {}
-
-function! OpamConfOcpIndent()
-  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
-endfunction
-let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-
-function! OpamConfOcpIndex()
-  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
-endfunction
-let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-
-function! OpamConfMerlin()
-  let l:dir = s:opam_share_dir . "/merlin/vim"
-  execute "set rtp+=" . l:dir
-endfunction
-let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-
-let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-" NOTE(pim): This command is really slow (~3s). let's hardocde it
-"let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
-"let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
-let s:opam_available_tools = ["merlin"]
-for tool in s:opam_packages
-  " Respect package order (merlin should be after ocp-index)
-  if count(s:opam_available_tools, tool) > 0
-    call s:opam_configuration[tool]()
-  endif
-endfor
-" ## end of OPAM user-setup addition for vim / base ## keep this line
-
-set completeopt+=menuone,noselect,noinsert
-set omnifunc=merlin#Complete
-
-let g:ycm_language_server =
-  \ [
-	  \   {
-	  \     'name': 'ocaml',
-  \     'cmdline': ['ocaml-language-server', '--stdio'],
-  \     'filetypes': ['ocaml']
-  \   },
-  \ ]
-
