@@ -1,1 +1,22 @@
+ - .alacritty.yml
+ - .config/dunst
+ - .config/gammastep ?
+ - .config/mako
+ - .config/mimeapps.list
+ - .config/redshift.conf
+ - .config/sway
+ - .config/systemd/
  - .gitconfig
+ - .gnupg/{gpg-agent,gpg.conf}
+ - .mutt
+ - .screenlayout
+ - .signatures
+ - .slrn / .slrnrc
+ - .ssh
+ - .swaylock/config
+ - .tarsnap / .tarsnaprc
+ - .tigrc
+ - .vim
+ - .Xdefaults
+ - .xinitrc
+ - .ycm_extra_conf.py
