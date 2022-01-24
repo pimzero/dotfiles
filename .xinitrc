@@ -20,4 +20,7 @@ usbguard-applet-qt &
 
 # Keyboard locale
 xmodmap /home/pim/.Xmodmap
+
+TERMINAL=alacritty; export TERMINAL
+
 exec i3
