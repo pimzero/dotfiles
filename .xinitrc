@@ -21,6 +21,8 @@ usbguard-applet-qt &
 # Keyboard locale
 xmodmap /home/pim/.Xmodmap
 
-TERMINAL=alacritty; export TERMINAL
+#TERMINAL=alacritty; export TERMINAL
+TERMINAL=kitty; export TERMINAL
+GTK_THEME=Adwaita:dark; export GTK_THEME
 
 exec i3
