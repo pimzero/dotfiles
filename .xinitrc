@@ -11,18 +11,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-mkdir -p /dev/shm/firefox_pim
-
-blueberry-tray &
-redshift-gtk &
-pasystray &
-usbguard-applet-qt &
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 # Keyboard locale
 xmodmap /home/pim/.Xmodmap
-
-#TERMINAL=alacritty; export TERMINAL
-TERMINAL=kitty; export TERMINAL
-GTK_THEME=Adwaita:dark; export GTK_THEME
 
 exec i3
