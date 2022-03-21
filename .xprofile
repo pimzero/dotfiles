@@ -1,9 +1,4 @@
 TERMINAL=kitty; export TERMINAL
 GTK_THEME=Adwaita:dark; export GTK_THEME
 
-blueberry-tray &
-redshift-gtk &
-pasystray &
-arch-audit-gtk &
-
 # vi: ft=sh

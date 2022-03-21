@@ -40,6 +40,7 @@ bindsym Mod1+F4 kill
 # start dmenu (a program launcher)
 #bindsym $mod+shift+d exec dmenu_run
 #bindsym $mod+d exec "rofi -combi-modi window,drun,ssh -theme solarized -font 'Ubuntu Mono 12' -show combi -icon-theme 'Papirus' -show-icons"
+bindsym $mod+space exec "rofi -combi-modi window,drun,ssh -theme solarized -font 'Ubuntu Mono 12' -show combi -icon-theme 'Papirus' -show-icons"
 bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -88,7 +89,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+q focus parent
@@ -223,3 +224,6 @@ popup_during_fullscreen leave_fullscreen
 
 exec_always --no-startup-id exec systemctl --user import-environment
 exec_always --no-startup-id exec systemctl --user start --no-block i3-session.target
+
+# Execute .desktop entries for i3
+exec dex -ae i3
