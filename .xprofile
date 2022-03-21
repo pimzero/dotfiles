@@ -1,4 +1,3 @@
 TERMINAL=kitty; export TERMINAL
-GTK_THEME=Adwaita:dark; export GTK_THEME
 
 # vi: ft=sh
