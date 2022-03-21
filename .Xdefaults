@@ -1,0 +1,19 @@
+ssh-askpass*font:                   monospace
+ssh-askpass*background:             #315975
+ssh-askpass*foreground:             #e8e8e8
+ssh-askpass.Button*background:      #55a5f6
+ssh-askpass.Indicator*foreground:   #55a5f6
+ssh-askpass.Indicator*background:   #2b303b
+ssh-askpass*topShadowColor:         #315975
+ssh-askpass*bottomShadowColor:      #315975
+ssh-askpass.*borderWidth:           0
+
+x11-ssh-askpass*font:                   monospace
+x11-ssh-askpass*background:             #315975
+x11-ssh-askpass*foreground:             #e8e8e8
+x11-ssh-askpass.Button*background:      #55a5f6
+x11-ssh-askpass.Indicator*foreground:   #55a5f6
+x11-ssh-askpass.Indicator*background:   #2b303b
+x11-ssh-askpass*topShadowColor:         #315975
+x11-ssh-askpass*bottomShadowColor:      #315975
+x11-ssh-askpass.*borderWidth:           0
