@@ -1,0 +1,11 @@
+[Unit]
+Description=IMAP notifier using IDLE, golang version.
+After=network.target
+
+[Service]
+ExecStart=goimapnotify -conf /home/pim/.mboxconf/%I/imapnotify.json
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target

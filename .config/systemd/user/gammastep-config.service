@@ -1,0 +1,11 @@
+[Unit]
+Description=gammastep Configuration change
+Documentation=Reload Gammastep on configuration change
+Wants=gammastep-config.path
+
+[Service]
+Type=oneshot
+ExecStart=systemctl restart  --user gammastep
+
+[Install]
+WantedBy=default.target

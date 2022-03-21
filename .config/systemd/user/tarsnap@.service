@@ -1,0 +1,11 @@
+[Unit]
+Description=Tarsnap backup %I
+Documentation=man:tarsnap(1)
+Wants=tarsnap@%i.timer
+
+[Service]
+Type=oneshot
+ExecStart=bash -c 'exec tarsnap --nodump -c -f "%I_$$(date +%%Y-%%m-%%d_%%H-%%M-%%S)" %I'
+
+[Install]
+WantedBy=default.target

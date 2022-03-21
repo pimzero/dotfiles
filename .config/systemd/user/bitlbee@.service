@@ -1,0 +1,6 @@
+[Unit]
+Description=BitlBee Per-Connection Server
+
+[Service]
+ExecStart=/usr/sbin/bitlbee -I -d /home/pim/.config/bitlbee/settings/ -c /home/pim/.config/bitlbee/bitlbee.conf
+StandardInput=socket

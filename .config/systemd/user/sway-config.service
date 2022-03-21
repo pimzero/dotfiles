@@ -1,0 +1,11 @@
+[Unit]
+Description=Sway Configuration change
+Documentation=Reload Sway on configuration change
+Wants=sway-config.path
+
+[Service]
+Type=oneshot
+ExecStart=bash -c 'for i in /run/user/1000/sway-ipc.*.sock; do SWAYSOCK=$i swaymsg reload; done'
+
+[Install]
+WantedBy=default.target
