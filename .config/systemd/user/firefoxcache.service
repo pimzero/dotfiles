@@ -1,9 +1,0 @@
-[Unit]
-Description=mkdir firefox cache
-
-[Service]
-ExecStart=/usr/bin/mkdir /dev/shm/firefox_pim
-Type=forking
-
-[Install]
-WantedBy=default.target
