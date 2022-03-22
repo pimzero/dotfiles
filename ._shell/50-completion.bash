@@ -8,3 +8,7 @@ if ! shopt -oq posix; then
 	. /etc/bash_completion
   fi
 fi
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+	. /usr/share/git/completion/git-completion.bash
+	__git_complete dotfiles __git_main
+fi
