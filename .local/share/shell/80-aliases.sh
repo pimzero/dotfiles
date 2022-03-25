@@ -31,7 +31,6 @@ alias suspend='systemctl suspend'
 alias pm-suspend='suspend'
 
 alias qemu-kvm='qemu-system-x86_64 -enable-kvm'
-alias gdb='gdb -q'
 alias ocaml='rlwrap ocaml'
 alias checkpatch='~/Data/linux/scripts/checkpatch.pl'
 alias gitlog="git --no-pager log --oneline --decorate"
