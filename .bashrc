@@ -28,4 +28,8 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # Import "~/.shellrc.sh"
-source ~/.shellrc.sh
+if [ "$XDG_CONFIG_HOME" != "" ]; then
+	source "$XDG_CONFIG_HOME/dotfiles/shellrc.sh"
+else
+	source "$HOME/.config/dotfiles/shellrc.sh"
+fi
