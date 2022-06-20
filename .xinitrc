@@ -14,6 +14,6 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Keyboard locale
-xmodmap /home/pim/.Xmodmap
+xmodmap $HOME/.Xmodmap
 
 exec i3
