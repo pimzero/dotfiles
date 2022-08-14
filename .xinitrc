@@ -16,4 +16,4 @@ fi
 # Keyboard locale
 xmodmap $HOME/.Xmodmap
 
-exec i3
+exec systemd-cat i3
