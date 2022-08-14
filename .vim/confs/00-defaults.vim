@@ -25,7 +25,7 @@ set scrolloff=7
 
 " Keep cursor position when vim is closed
 if has("autocmd")
-	au BufReadPost * 
+	au BufReadPost *
 	\ if line("'\"") > 1 && line("'\"") <= line("$") |
 	\   exe "normal! g'\"" |
 	\ endif
@@ -53,3 +53,7 @@ endif
 " Encoding
 let &termencoding = &encoding
 set encoding=utf-8
+
+if has('nvim')
+	let g:python3_host_prog = '/usr/bin/python'
+endif
