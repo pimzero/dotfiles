@@ -79,3 +79,20 @@ rsync
 mutt
 tarsnap
 ```
+
+### Home hierarchy
+
+```
+$ mkdir -p Data \
+           Desktop \
+           Documents \
+           Downloads \
+           Games \
+           Images \
+           Music \
+           Notes \
+           Screenshots \
+           Shared \
+           Videos \
+           Workspace
+```
